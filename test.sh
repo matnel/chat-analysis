@@ -1,0 +1,1 @@
+tail -f ../mixer-pre/db/dev.db | python extract.py
