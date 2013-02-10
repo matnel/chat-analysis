@@ -52,8 +52,6 @@ def handle( line ):
         out.append( r.search( sentiment.read() ).group(1) )
         ## 3 = message lenght
         out.append( str( len( msg['message'] ) ) )
-        print msg['message']
-        print len( msg['message'] )
         ## 4 = voices
         out.append( str( hash( msg['from'] ) ) )
 	sonify( analysis( _parse( ','.join(out) ) ) )
