@@ -1,5 +1,7 @@
 import math
 
+out = open('data', 'a' )
+
 _chord = {
 	0 : 'major',
 	1 : 'major7',
@@ -31,11 +33,14 @@ def _tempo( delta ):
 
 def sonify( data ):
 # delta, mean mood, this mood, mean weight, this weight, voices
-   print 'chordtype ' + _chord[ round( data[1] ) ]
-   print 'voices ' + _voices( data[5] )
-   print 'rythmdensity ' + _density( data[3] )
-   print 'tempo ' + _tempo( data[0] )
+   out.write( 'chordtype ' + _chord[ round( data[1] ) ] + '\n' )
+   out.write( 'voices ' + _voices( data[5] ) + '\n' )
+   out.write( 'rythmdensity ' + _density( data[3] ) + '\n' )
+   out.write( 'tempo ' + _tempo( data[0] ) + '\n' )
+   out.flush()
 
 ## initial
-print 'sound on'
-print 'globalvolume 75'
+out.write( 'sound on \n' )
+out.write( 'globalvolume 75 \n' )
+out.write( 'tempo 100 \n' )
+out.flush()
