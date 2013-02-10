@@ -1,3 +1,5 @@
+import math
+
 chord = {
 	0 : 'major',
 	1 : 'major7',
@@ -17,12 +19,18 @@ def _voices( voices ):
 		return '5'
 	return '6'
 
-import math
+def _density( mean ):
+	x = int( mean / 20 ) + 1
+	if x < 10:
+		return str( x )
+	return '10'
 
 def sonify( data ):
 # delta, mean mood, this mood, mean weight, this weight, voices
    print 'chordtype ' + chord[ round( data[1] ) ]
    print 'voices ' + _voices( data[5] )
+   print data[3]
+   print 'rythmdensity ' + _density( data[3] )
 
 ## initial
 print 'sound on'
