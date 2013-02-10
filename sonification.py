@@ -20,6 +20,7 @@ def _voices( voices ):
 	return '6'
 
 def _density( mean ):
+	## TODO: check this from empirical logs!
 	x = int( mean / 20 ) + 1
 	if x < 10:
 		return str( x )
@@ -29,7 +30,6 @@ def sonify( data ):
 # delta, mean mood, this mood, mean weight, this weight, voices
    print 'chordtype ' + chord[ round( data[1] ) ]
    print 'voices ' + _voices( data[5] )
-   print data[3]
    print 'rythmdensity ' + _density( data[3] )
 
 ## initial
