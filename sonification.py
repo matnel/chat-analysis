@@ -26,11 +26,17 @@ def _density( mean ):
 		return str( x )
 	return '10'
 
+def _tempo( delta ):
+	x = 150 * delta / 60000
+	tempo = 250 - x
+	return str( tempo ) if tempo > 5 else '5'
+
 def sonify( data ):
 # delta, mean mood, this mood, mean weight, this weight, voices
    print 'chordtype ' + chord[ round( data[1] ) ]
    print 'voices ' + _voices( data[5] )
    print 'rythmdensity ' + _density( data[3] )
+   print 'tempo ' + _tempo( data[0] )
 
 ## initial
 print 'sound on'
