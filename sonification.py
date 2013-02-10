@@ -1,6 +1,14 @@
 import math
 
-out = open('data', 'a' )
+file = open('data', 'a' )
+
+def out( data ):
+	if isinstance(data, list ):
+		data = '\n'.join(data)
+	file.write( data + '\n' )
+	file.flush()
+	print data
+
 
 _chord = {
 	0 : 'major',
@@ -33,14 +41,12 @@ def _tempo( delta ):
 
 def sonify( data ):
 # delta, mean mood, this mood, mean weight, this weight, voices
-   out.write( 'chordtype ' + _chord[ round( data[1] ) ] + '\n' )
-   out.write( 'voices ' + _voices( data[5] ) + '\n' )
-   out.write( 'rythmdensity ' + _density( data[3] ) + '\n' )
-   out.write( 'tempo ' + _tempo( data[0] ) + '\n' )
-   out.flush()
+   out( [
+   		'chordtype ' + _chord[ round( data[1] ) ],
+   		'voices ' + _voices( data[5] ),
+   		'rythmdensity ' + _density( data[3] ),
+   		'tempo ' + _tempo( data[0] )
+   	] )
 
 ## initial
-out.write( 'sound on \n' )
-out.write( 'globalvolume 75 \n' )
-out.write( 'tempo 100 \n' )
-out.flush()
+out( [ 'sound on', 'globalvolume 75' , 'tempo 100' ] )
