@@ -41,12 +41,12 @@ def handle( line ):
        return
    if line['key'].startswith( 'msgs:' ):
         ## analyze the message lenghts
-	msg = line['val'][-1]
+        msg = line['val'][-1]
         http = 'http://sentistrength.wlv.ac.uk/results.php?' + urllib.urlencode( { 'text' :  msg['message'] } )
 	sentiment = urllib2.urlopen( http )
         t =  msg['time']
         out = []
-        ## 0 = MOOD
+        ## 0 = TIME
         out.append( datetime.strptime( t , '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%s') )
         ## 1, 2 == SENTIMENT
         out.append( r.search( sentiment.read() ).group(1) )
@@ -54,6 +54,7 @@ def handle( line ):
         out.append( str( len( msg['message'] ) ) )
         ## 4 = voices
         out.append( str( hash( msg['from'] ) ) )
+	sys.stdout.flush()
 	sonify( analysis( _parse( ','.join(out) ) ) )
 
 while True:
