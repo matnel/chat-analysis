@@ -9,7 +9,7 @@ from datetime import datetime
 
 from sonification import sonify
 
-r = re.compile("\[sentence:(.*[0-9])\]")
+r = re.compile(".*\[sentence:(.*[0-9])\]")
 
 def _parse( line ):
    return map( lambda x: int(x), line.strip().split(',') )
