@@ -10,26 +10,31 @@ def out( data ):
 	print data
 
 
+## use scaletype??
+
 _chord = {
 	0 : 'major',
-	1 : 'major7',
-	2 : 'majormaj7',
-	3 : 'major6',
+	1 : 'major',
+	2 : 'major',
+	3 : 'major',
 	-1: 'minor',
-	-2: 'minor7',
-	-3: 'minormaj7',
+	-2: 'minor',
+	-3: 'minor',
 }
 
+## harmonity??
+
 def _voices( voices ):
-	if voices < 3:
+	if voices <= 5:
 		return str( voices )
-	if voices < 5:
-		return '4'
 	if voices < 10:
-		return '5'
-	return '6'
+		return '6'
+	if voices < 15:
+		return '7'
+	return '8'
 
 def _density( mean ):
+	## TODO: test more!
 	## TODO: check this from empirical logs!
 	x = int( mean / 20 ) + 1
 	return str( x ) if x < 10 else '10'
@@ -49,4 +54,4 @@ def sonify( data ):
    	] )
 
 ## initial
-out( [ 'sound on', 'globalvolume 75' , 'tempo 100' ] )
+out( [ 'sound on', 'drums on', 'globalvolume 75' , 'tempo 100' ] )
