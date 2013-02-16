@@ -35,7 +35,10 @@ def _density( mean ):
 	x = int( mean / 20 ) + 1
 	return str( x ) if x < 10 else '10'
 
+tempo = 0
+
 def _tempo( delta ):
+	global tempo
 	x = delta * 1.5
         tempo = int( 150 - x )
 	return str( tempo ) if tempo > 5 else '5'
@@ -52,3 +55,21 @@ def sonify( data ):
 
 ## initial
 out( [ 'sound on', 'drums on', 'tempo 100' ] )
+
+
+## thead for reducing tempo
+
+import time
+from threading import Thread
+
+def reduce_tempo():
+    global tempo
+    while True:
+       tempo = tempo - 5
+       if tempo < 5:
+           tempo = 5
+       out( 'tempo ' + str( tempo ) )
+       time.sleep( 5 )
+
+t = Thread( target = reduce_tempo )
+t.start()
