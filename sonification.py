@@ -1,11 +1,12 @@
 import math
+import sys
 
 file = open('data', 'a' )
 
 def out( data ):
 	if isinstance(data, list ):
-		data = '\n'.join(data)
-	file.write( data + '\n' )
+		data = '\n'.join(data) + '\n'
+	file.write( data )
 	file.flush()
 	print data
 
@@ -35,19 +36,19 @@ def _density( mean ):
 	return str( x ) if x < 10 else '10'
 
 def _tempo( delta ):
-	x = 150 * delta / 60000
-	tempo = 250 - x
+	x = delta * 1.5
+        tempo = int( 150 - x )
 	return str( tempo ) if tempo > 5 else '5'
 
 def sonify( data ):
 # delta, mean mood, this mood, mean weight, this weight, voices
    out( [
    		'scaletype ' + _chord[ round( data[1] ) ],
-		'harmonity ' + str( 5 + round( data[1] ) ),
+		'harmonity ' + str( int( 5 + data[1] ) ),
    		'voices ' + _voices( data[5] ),
    		'rythmdensity ' + _density( data[3] ),
    		'tempo ' + _tempo( data[0] )
    	] )
 
 ## initial
-out( [ 'sound on', 'drums on', 'globalvolume 75' , 'tempo 100' ] )
+out( [ 'sound on', 'drums on', 'tempo 100' ] )
