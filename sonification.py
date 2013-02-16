@@ -40,7 +40,8 @@ tempo = 0
 def _tempo( delta ):
 	global tempo
 	x = delta * 1.5
-        tempo = int( 150 - x )
+	if int( 150 - x ) > tempo:
+        	tempo = int( 150 - x )
 	return str( tempo ) if tempo > 5 else '5'
 
 def sonify( data ):
