@@ -17,9 +17,9 @@ _chord = {
 	1 : 'major',
 	2 : 'major',
 	3 : 'major',
-	-1: 'minor',
-	-2: 'minor',
-	-3: 'minor',
+	-1: 'naturalminor',
+	-2: 'naturalminor',
+	-3: 'naturalminor',
 }
 
 ## harmonity??
@@ -47,7 +47,7 @@ def _tempo( delta ):
 def sonify( data ):
 # delta, mean mood, this mood, mean weight, this weight, voices
    out( [
-   		'chordtype ' + _chord[ round( data[1] ) ],
+   		'scaletype ' + _chord[ round( data[1] ) ],
    		'voices ' + _voices( data[5] ),
    		'rythmdensity ' + _density( data[3] ),
    		'tempo ' + _tempo( data[0] )
