@@ -5,8 +5,8 @@ file = open('data', 'a' )
 
 def out( data ):
 	if isinstance(data, list ):
-		data = '\n'.join(data) + '\n'
-	file.write( data )
+		data = '\n'.join(data)
+	file.write( data + '\n' )
 	file.flush()
 	print data
 
@@ -58,7 +58,6 @@ out( [ 'sound on', 'drums on', 'tempo 100' ] )
 
 
 ## thead for reducing tempo
-
 import time
 from threading import Thread
 
@@ -72,4 +71,5 @@ def reduce_tempo():
        time.sleep( 5 )
 
 t = Thread( target = reduce_tempo )
+t.daemon = True
 t.start()
