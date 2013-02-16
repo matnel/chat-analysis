@@ -9,9 +9,6 @@ def out( data ):
 	file.flush()
 	print data
 
-
-## use scaletype??
-
 _chord = {
 	0 : 'major',
 	1 : 'major',
@@ -21,8 +18,6 @@ _chord = {
 	-2: 'naturalminor',
 	-3: 'naturalminor',
 }
-
-## harmonity??
 
 def _voices( voices ):
 	if voices <= 5:
@@ -48,6 +43,7 @@ def sonify( data ):
 # delta, mean mood, this mood, mean weight, this weight, voices
    out( [
    		'scaletype ' + _chord[ round( data[1] ) ],
+		'harmonity ' + str( 5 + round( data[1] ) ),
    		'voices ' + _voices( data[5] ),
    		'rythmdensity ' + _density( data[3] ),
    		'tempo ' + _tempo( data[0] )
