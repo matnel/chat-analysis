@@ -32,8 +32,8 @@ def _voices( voices ):
 def _density( mean ):
 	## TODO: test more!
 	## TODO: check this from empirical logs!
-	x = int( mean / 10 ) + 2
-	return str( x ) if x < 16 else '16'
+	x = int( mean / 10 ) + 1
+	return str( x ) if x < 10 else '10'
 
 tempo = 0
 
@@ -44,13 +44,23 @@ def _tempo( delta ):
         	tempo = int( 150 - x )
 	return str( tempo ) if tempo > 5 else '5'
 
+harmonity = {
+-3 : '1',
+-2 : '1',
+-1 : '1',
+0 : '5',
+1 : '6',
+2 : '9',
+3 : '10'
+}
+
 def sonify( data ):
 # delta, mean mood, this mood, mean weight, this weight, voices
    out( [
    		'scaletype ' + _chord[ round( data[1] ) ],
-		'harmonity ' + str( int( 5 + data[1] ) ),
+		'harmony ' + harmonity[ round( data[1] ) ],
    		'voices ' + _voices( data[5] ),
-   		'fraselenght ' + _density( data[3] ),
+   		'rythmdensity ' + _density( data[3] ),
    		'tempo ' + _tempo( data[0] )
    	] )
 
