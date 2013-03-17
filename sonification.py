@@ -21,13 +21,11 @@ _chord = {
 }
 
 def _voices( voices ):
-	if voices <= 5:
-		return str( voices )
+	if voices <= 3:
+		return str( voices + 2 )
 	if voices < 10:
 		return '6'
-	if voices < 15:
-		return '7'
-	return '8'
+	return '7'
 
 def _density( mean ):
 	## TODO: test more!
