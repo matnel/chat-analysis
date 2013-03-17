@@ -35,14 +35,7 @@ def _density( mean ):
 	x = int( mean / 10 ) + 1
 	return str( x ) if x < 10 else '10'
 
-tempo = 0
-
-def _tempo( delta ):
-	global tempo
-	x = delta * 1.5
-	if int( 150 - x ) > tempo:
-        	tempo = int( 150 - x )
-	return str( tempo ) if tempo > 5 else '5'
+delta = 0
 
 harmonity = {
 -3 : '1',
@@ -55,14 +48,15 @@ harmonity = {
 }
 
 def sonify( data ):
+   global delta
 # delta, mean mood, this mood, mean weight, this weight, voices
    out( [
    		'scaletype ' + _chord[ round( data[1] ) ],
 		'harmony ' + harmonity[ round( data[1] ) ],
    		'voices ' + _voices( data[5] ),
-   		'rythmdensity ' + _density( data[3] ),
-   		'tempo ' + _tempo( data[0] )
+   		'rythmdensity ' + _density( data[3] )
    	] )
+   delta = data[0]
 
 ## initial
 out( [ 'sound on', 'drums on', 'tempo 100' ] )
@@ -73,13 +67,14 @@ import time
 from threading import Thread
 
 def reduce_tempo():
-    global tempo
+    global delta
     while True:
-       tempo = tempo - 5
-       if tempo < 5:
-           tempo = 5
-       out( 'tempo ' + str( tempo ) )
-       time.sleep( 5 )
+       d = int(time.time() - delta - 120*60) ## server time off by 2h
+       t = round( 240 - d ) + 10
+       if t < 10:
+          t = 10
+       out( 'tempo ' + str( t ) )
+       time.sleep( 2 )
 
 t = Thread( target = reduce_tempo )
 t.daemon = True
