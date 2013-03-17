@@ -52,7 +52,6 @@ def sonify( data ):
    		'scaletype ' + _chord[ round( data[1] ) ],
 		'harmony ' + harmonity[ round( data[1] ) ],
    		'voices ' + _voices( data[5] ),
-   		'rythmdensity ' + _density( data[3] )
    	] )
    delta = data[0]
 
