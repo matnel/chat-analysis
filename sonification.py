@@ -25,7 +25,7 @@ def _voices( voices ):
 		return str( voices + 2 )
 	if voices < 10:
 		return '6'
-	return '7'
+	return '8'
 
 def _density( mean ):
 	## TODO: test more!
