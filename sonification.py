@@ -5,11 +5,11 @@ import datetime
 file = open('data', 'a' )
 
 def out( data ):
+	print data
 	if isinstance(data, list ):
 		data = '\n'.join(data)
 	file.write( data + '\n' )
 	file.flush()
-#	print data
 
 _chord = {
 	0 : 'major',
@@ -70,7 +70,6 @@ def reduce_tempo():
        d = datetime.datetime.utcnow() - previous
        d = d.total_seconds() ## offset by one hour
        t = round( 240 - d ) + 10
-       print d
        if t < 10:
           t = 10
        out( 'tempo ' + str( t ) )
