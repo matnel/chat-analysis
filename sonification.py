@@ -68,7 +68,7 @@ def reduce_tempo():
     global previous
     while True:
        d = datetime.datetime.utcnow() - previous
-       d = d.total_seconds() ## offset by one hour
+       d = d.total_seconds()
        t = round( 240 - d ) + 10
        if t < 10:
           t = 10
