@@ -1,5 +1,6 @@
 import math
 import sys
+import datetime
 
 file = open('data', 'a' )
 
@@ -8,7 +9,7 @@ def out( data ):
 		data = '\n'.join(data)
 	file.write( data + '\n' )
 	file.flush()
-	print data
+#	print data
 
 _chord = {
 	0 : 'major',
@@ -33,7 +34,7 @@ def _density( mean ):
 	x = int( mean / 10 ) + 1
 	return str( x ) if x < 10 else '10'
 
-delta = 0
+previous = datetime.datetime.utcnow()
 
 harmonity = {
 -3 : '1',
@@ -46,14 +47,14 @@ harmonity = {
 }
 
 def sonify( data ):
-   global delta
+   global previous
 # delta, mean mood, this mood, mean weight, this weight, voices
    out( [
    		'scaletype ' + _chord[ round( data[1] ) ],
 		'harmony ' + harmonity[ round( data[1] ) ],
    		'voices ' + _voices( data[5] ),
    	] )
-   delta = data[0]
+   previous = datetime.datetime.fromtimestamp( data[0] )
 
 ## initial
 out( [ 'sound on', 'drums on', 'tempo 100' ] )
@@ -64,10 +65,12 @@ import time
 from threading import Thread
 
 def reduce_tempo():
-    global delta
+    global previous
     while True:
-       d = int(time.time() - delta - 120*60) ## server time off by 2h
+       d = datetime.datetime.utcnow() - previous
+       d = d.total_seconds() ## offset by one hour
        t = round( 240 - d ) + 10
+       print d
        if t < 10:
           t = 10
        out( 'tempo ' + str( t ) )
