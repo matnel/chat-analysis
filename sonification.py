@@ -72,7 +72,7 @@ def reduce_tempo():
        t = round( 240 - d ) + 10
        if t < 10:
           t = 10
-       out( 'tempo ' + str( t ) )
+       out( 'tempo ' + str( int(t) ) )
        time.sleep( 2 )
 
 t = Thread( target = reduce_tempo )
