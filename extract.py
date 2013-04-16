@@ -34,7 +34,7 @@ def analysis( data ):
   weight = reduce( lambda x, y: x+y, map( lambda x : x[3], store ) )
   voices = len( set( map( lambda x : x[4], store ) ) )
   # delta, mean mood, this mood, mean weight, this weight, number of voices
-  return ( store[-1][0] , mood / size , _mood( data[1], data[2] ) , weight / size, store[-1][3], voices )
+  return ( store[0][0] , mood / size , _mood( data[1], data[2] ) , weight / size, store[-1][3], voices )
 
 def handle( line ):
    if not 'key' in line:
