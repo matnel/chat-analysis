@@ -64,14 +64,21 @@ out( [ 'sound on', 'drums on', 'tempo 100' ] )
 import time
 from threading import Thread
 
+import scipy.stats as stats
+
 def reduce_tempo():
     global previous
+    mean = 75
+    sigma = 30
+    upper = mean + 2 * sigma
+    dist = stats.norm( mean, sigma )
     while True:
-       d = datetime.datetime.utcnow() - previous
-       d = d.total_seconds()
-       t = round( 240 - d ) + 10
-       if t < 10:
-          t = 10
+       delta = datetime.datetime.utcnow() - previous
+       delta = delta.total_seconds()
+       print delta
+       t = dist.cdf( upper - delta ) * upper 
+       if t < 20:
+          t = 20
        out( 'tempo ' + str( int(t) ) )
        time.sleep( 2 )
 
