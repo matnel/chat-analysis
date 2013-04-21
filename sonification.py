@@ -37,13 +37,15 @@ def _density( mean ):
 previous = datetime.datetime.utcnow()
 
 harmonity = {
+-4 : '1',
 -3 : '1',
 -2 : '1',
--1 : '1',
+-1 : '5',
 0 : '5',
 1 : '5',
 2 : '9',
-3 : '9'
+3 : '9',
+4 : '9'
 }
 
 def sonify( data ):
