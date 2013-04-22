@@ -77,8 +77,7 @@ def reduce_tempo():
     while True:
        delta = datetime.datetime.utcnow() - previous
        delta = delta.total_seconds()
-       print delta
-       t = dist.cdf( upper - delta ) * upper 
+       t = dist.cdf( upper - delta ) * 120
        if t < 20:
           t = 20
        out( 'tempo ' + str( int(t) ) )
